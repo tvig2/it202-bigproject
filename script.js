@@ -41,6 +41,14 @@ $(document).ready(function() {
 });
 
 
+function initMap() {
+                 // The location of Chicago
+                 var chicago = {lat: 41.8781, lng: -87.6298};
+                 // The map, centered at Uluru
+                 var map = new google.maps.Map(
+                 document.getElementById('map'), {zoom: 11, center: chicago});
+                 createMarkers(map);
+}
 
 
 
