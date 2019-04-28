@@ -4,18 +4,22 @@ var navItems = [
   "divider",
   {"label": "Data example", "screen": "data", "icon": "list"},
   {"label": "Sheet as API", "screen": "sheet-as-api", "icon": "list"},
-  {"label": "Map View", "screen": "mapview", "icon": "list"}
+  {"label": "Map View", "screen": "mapview", "icon": "list"},
+  {"label": "Contact Us", "screen": "apply", "icon": "list"}
   
   // ,
   // {"label": "Google Sign-in", "screen": "google-sign-in", "icon": "person"}
   
 ];
 
-
+var db = new Dexie("chicago_database");
+db.version(1).stores({
+   properties: '++id,property_name'
+});
 
 $(document).ready(function() {
 
-
+//   navigator.geolocation.getCurrentPosition(success);
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
 
@@ -39,18 +43,6 @@ $(document).ready(function() {
   });
 
 });
-
-
-function initMap() {
-                 // The location of Chicago
-                 var chicago = {lat: 41.8781, lng: -87.6298};
-                 // The map, centered at Uluru
-                 var map = new google.maps.Map(
-                 document.getElementById('map'), {zoom: 11, center: chicago});
-                 createMarkers(map);
-}
-
-
 
 /**
  * load nav

@@ -1,31 +1,55 @@
 <div id="screenContent">
-  <h3 class="mdc-typography--headline3">Search apartments currently in our database.</h3>
+  <h3 class="mdc-typography--headline3">Browse the properties we have catalogued.</h3>
+  <p>Just click on one to add to your favorites!</p>
+  <input type="text" placeholder="Search.." id="search">
   <img id="loading" src="https://i.gifer.com/4V0b.gif">
   <ul class="mdc-list demo-list mdc-list--two-line">
     <li class="template mdc-list-item mdc-ripple-upgraded" tabindex="-1"><span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Line item</span><span class="mdc-list-item__secondary-text">Secondary text</span></span></li>
   </ul>
 </div>
 
-
-
-
 <script>
 
+var aptData = "https://data.cityofchicago.org/resource/uahe-iimk.json";    
 var endpoint = "https://data.cityofchicago.org/resource/tt4n-kn4t.json";
-
-$.get(endpoint, function(response) {
-  $.each(response, function(i,v) {
-    var clone = $("#screenContent li.template").clone();
-    clone.find(".mdc-list-item__primary-text").text(v.name);
-    clone.find(".mdc-list-item__secondary-text").text(v.department);
-    clone.removeClass("template");
-    clone.attr("id", v.name);
-    $("#screenContent ul").append(clone);  
-
-  });
-  $("#loading").hide();
+    
+$.get(aptData, function(response) {
+      $.each(response, function(i,v) {
+            var clone = $("#screenContent li.template").clone();
+            clone.find(".mdc-list-item__primary-text").text(v.property_name);
+            clone.find(".mdc-list-item__secondary-text").text(v.address);
+            clone.removeClass("template");
+            clone.attr("id", v.property_name);
+            $("#screenContent ul").append(clone);   
+      });
+      $("#loading").hide();
+});  
+    
+$("#search").on("input", function() {
+    
+    var name = $("#search").val();
+    
+//     if(v.property_name.indexOf(name) >= 0)
+    $("#screenContent .mdc-list-item").each(function(i) {
+       var propName = $(this).find(".mdc-list-item__primary-text").text().toLowerCase();
+       if(!propName.startsWith(name)) {
+            $(this).hide()
+       }
+        else {
+            $(this).show()
+        }
+    });
 });
-
-
+    
+$("#screenContent").on("click", ".mdc-list-item", function()
+{
+    console.log($(this).find(".mdc-list-item__primary-text").text() + " | " + $(this).find(".mdc-list-item__secondary-text").text());
+    
+    var p_name = $(this).find(".mdc-list-item__primary-text").text();
+    var add = $(this).find(".mdc-list-item__secondary-text").text();
+    
+    db.properties.put({property_name: p_name, address: add});
+    
+});
 
 </script>
