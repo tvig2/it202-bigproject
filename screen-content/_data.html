@@ -1,4 +1,5 @@
 <div id="screenContent">
+  <p id="weather">Current Weather in Chicago: </p>
   <h3 class="mdc-typography--headline3">Browse the properties we have catalogued.</h3>
   <p>Just click on one to add to your favorites!</p>
   <input type="text" placeholder="Search.." id="search">
@@ -12,6 +13,27 @@
 
 var aptData = "https://data.cityofchicago.org/resource/uahe-iimk.json";    
 var endpoint = "https://data.cityofchicago.org/resource/tt4n-kn4t.json";
+  
+// var weatherData = "https://api.darksky.net/forecast/895d9547d38e05472262f33351bdaf05/41.881832,-87.623177";  
+    
+// $.get(weatherData, function(response) {
+//         console.log("in get");
+//    $.each(response, function(i,v) {
+//        document.getElementById("weather").value += v.currently.temperature;
+//        console.log(v.currently.temperature);
+//    });
+// });   
+    
+$.ajax({
+   type: 'GET',
+   crossDomain: true,
+   dataType: 'jsonp',
+   url: 'https://api.darksky.net/forecast/895d9547d38e05472262f33351bdaf05/41.881832,-87.623177',
+   success: function(jsondata){
+       document.getElementById("weather").innerHTML ="Current weather in Chicago: " + jsondata.currently.temperature + " degrees F";
+       console.log(jsondata.currently.temperature);
+   }
+});
     
 $.get(aptData, function(response) {
       $.each(response, function(i,v) {

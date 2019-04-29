@@ -1,9 +1,7 @@
 var navItems = [
   {"label": "About", "screen": "about", "icon": "info"},
-  {"label": "Resources", "screen": "resources", "icon": "library_books"},
   "divider",
-  {"label": "Data example", "screen": "data", "icon": "list"},
-  {"label": "Sheet as API", "screen": "sheet-as-api", "icon": "list"},
+  {"label": "Listings", "screen": "data", "icon": "list"},
   {"label": "Map View", "screen": "mapview", "icon": "list"},
   {"label": "Contact Us", "screen": "apply", "icon": "list"}
   

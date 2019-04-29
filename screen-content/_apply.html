@@ -2,3 +2,44 @@
   <h3 class="mdc-typography--headline3">Interested in any properties?</h3>
   <p>Below is a form where you can tell us about the properties you want to look more into and we can check for availability and even get you in contact with an agent.</p>
 </div>
+<form action="/action_page.php">
+  First name:<br>
+  <input type="text" name="firstname" value="">
+  <br>
+  Last name:<br>
+  <input type="text" name="lastname" value="">
+  <br>
+  Email:<br>
+  <input type="text" name="email" value="">
+  <br>
+  Message:<br>
+  <textarea rows="15" cols="50" id="message">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+  </textarea>
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 
+<script>
+    
+    $(document).ready(function()
+    {
+        console.log("apply page");
+    
+        var messageString = "Hello, I'm interested in the following properties."
+    
+        var messageStringFinal = "";
+        
+        document.getElementById("message").value = messageString;
+    
+        db.properties.each(function(property)
+        {
+            messageStringFinal = "[" + property.property_name + " | " + property.address + "] ";
+            
+            document.getElementById("message").value += messageStringFinal;
+//             console.log(messageString);
+        });
+    
+        document.getElementById("message").value += " Please let me know about current availability and other details regarding these properties. Thank you!\n"
+        
+    });
+    
+</script>

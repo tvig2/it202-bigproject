@@ -1,6 +1,6 @@
 {
-  "name": "My Cool App",
-  "short_name": "My Cool App",
+  "name": "Zoom Living Agency",
+  "short_name": "Zoom Living",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "navy",
